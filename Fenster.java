@@ -26,7 +26,7 @@ class Fenster extends JFrame implements ActionListener {
     JButton plusButton = new JButton("+");          
     JButton minusButton = new JButton("-");        
     JButton malButton = new JButton("·");         
-    JButton geteiltButton = new JButton("/");     
+    JButton geteiltButton = new JButton("÷");     
     JButton gleichButton = new JButton("=");      
     JButton kommaButton = new JButton(",");           
     JButton löschenButton = new JButton("Löschen"); 
