@@ -52,7 +52,7 @@ class Fenster extends JFrame implements ActionListener {
         löschenButton.setBounds(75, 310, 100, 50);
         
         //Jedes Objekt im Array für die Zahlen wird initialisiert und erhält anschließend einen ActionListener
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < zahlenButtons.length; i++) {
             zahlenButtons[i] = new JButton(String.valueOf(i));
             zahlenButtons[i].addActionListener(this);
             panel.add(zahlenButtons[i]);
@@ -68,7 +68,7 @@ class Fenster extends JFrame implements ActionListener {
         operatorButtons[6] = löschenButton;     
         
         //Jeder Operator-Button im Array erhält einen ActionListener
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < operatorButtons.length; i++) {
             operatorButtons[i].addActionListener(this);
         } 
      
