@@ -10,40 +10,46 @@ import javax.swing.JTextField;
 
 class Fenster extends JFrame implements ActionListener {
     
-    //Ausgabe wird deklariert
-    JTextField textfeld;
-    
-    //Container für die Buttons wird deklariert (enthält die Zahlen und Operatoren)
-    JPanel panel;        
-    
     //Button-Array wird deklariert und initialisiert (speichert die Zahlen-Buttons)
     JButton[] zahlenButtons = new JButton[10]; 
     
     //Button-Array wird deklariert und initialisiert (speichert die Operator-Buttons)
     JButton[] operatorButtons = new JButton[7]; 
     
-    //Operator-Buttons werden deklariert
-    JButton plusButton, minusButton, malButton, geteiltButton, gleichButton, kommaButton, löschenButton;
+    //Ausgabe wird deklariert und initialisiert
+    JTextField textfeld = new JTextField();
     
-    double nummer1 = 0, nummer2 = 0, ergebnis = 0;
+    //Container für die Buttons wird deklariert und initialisiert (enthält die Zahlen und Operatoren)
+    JPanel panel = new JPanel();        
     
+    //Operator-Buttons werden deklariert und initialisiert
+    JButton plusButton = new JButton("+");          
+    JButton minusButton = new JButton("-");        
+    JButton malButton = new JButton("·");         
+    JButton geteiltButton = new JButton("/");     
+    JButton gleichButton = new JButton("=");      
+    JButton kommaButton = new JButton(",");           
+    JButton löschenButton = new JButton("Löschen"); 
+    
+    double nummer1 = 0, nummer2 = 0, ergebnis = 0;  
     char operator;
     
     public Fenster () {
-        this.setSize(400, 600);
+        this.setSize(250, 400);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setTitle("Taschenrechner");
         
         //Textfeld wird initialisiert, positioniert und für den Benutzer unmöglich zu bearbeiten
-        textfeld = new JTextField();
-        textfeld.setBounds(50, 25, 300, 50);
+        textfeld.setBounds(25, 25, 200, 50);
         textfeld.setEditable(false);
         
-        //Das Panel wird initialisiert, positioniert und mit einem Grid-Layout für die Buttons versehen
-        panel = new JPanel();                           
-        panel.setBounds(50, 100, 300, 300);             
-        panel.setLayout(new GridLayout(4, 4, 10, 10));
+        //Das Panel wird initialisiert, positioniert und mit einem Grid-Layout für die Buttons versehen                 
+        panel.setBounds(25, 100, 200, 200);             
+        panel.setLayout(new GridLayout(4, 4, 0, 0));
+
+        //Löschen-Button wird positioniert    
+        löschenButton.setBounds(75, 310, 100, 50);
         
         //Jedes Objekt im Array für die Zahlen wird initialisiert und erhält anschließend einen ActionListener
         for (int i = 0; i < 10; i++) {
@@ -51,15 +57,6 @@ class Fenster extends JFrame implements ActionListener {
             zahlenButtons[i].addActionListener(this);
             panel.add(zahlenButtons[i]);
         }
-        
-        //Operator-Buttons werden initialisiert
-        plusButton = new JButton("+");          
-        minusButton = new JButton("-");        
-        malButton = new JButton("*");         
-        geteiltButton = new JButton("/");     
-        gleichButton = new JButton("=");      
-        kommaButton = new JButton(".");           
-        löschenButton = new JButton("Löschen"); 
         
         //Operator-Buttons werden dem entsprechenden Array hinzugefügt
         operatorButtons[0] = plusButton;        
@@ -73,10 +70,7 @@ class Fenster extends JFrame implements ActionListener {
         //Jeder Operator-Button im Array erhält einen ActionListener
         for (int i = 0; i < 7; i++) {
             operatorButtons[i].addActionListener(this);
-        }
-
-        //Löschen-Button wird positioniert    
-        löschenButton.setBounds(250, 430, 100, 50);     
+        } 
      
         //4x4-Matrix beginnt/////////////////////////////////////////////////////////////////////////////////////////////////
         panel.add(zahlenButtons[1]); //Die Buttons mit den Werte 1 bis 3 werden nebeneinander auf dem Panel eingefügt
@@ -100,10 +94,8 @@ class Fenster extends JFrame implements ActionListener {
         panel.add(geteiltButton);    //
         //4x4-matrix endet///////////////////////////////////////////////////////////////////////////////////////////////////
         
-        
         //Löschen-Button wird auf dem JFrame hinzugefüg
         this.add(löschenButton);     
-
         
         //Textfeld der Ausgabe wird auf dem JFrame hinzugefügt
         this.add(textfeld);  
@@ -167,7 +159,6 @@ class Fenster extends JFrame implements ActionListener {
             }
             
             textfeld.setText(String.valueOf(ergebnis));               //Dem Textfeld wird das Ergebnis hinzugefügt
-            nummer1 = ergebnis;                                       //Für weitere Berechnungen wird das Ergebnis zwischengespeichert
         }
         
         if (e.getSource() == löschenButton) {                         //Wird der "Löschen"-Button gedrückt,
