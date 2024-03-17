@@ -25,10 +25,10 @@ class Fenster extends JFrame implements ActionListener {
     //Operator-Buttons werden deklariert und initialisiert
     JButton plusButton = new JButton("+");          
     JButton minusButton = new JButton("-");        
-    JButton malButton = new JButton("·");         
-    JButton geteiltButton = new JButton("÷");     
-    JButton gleichButton = new JButton("=");      
-    JButton kommaButton = new JButton(",");           
+    JButton malButton = new JButton("·");    
+    JButton kommaButton = new JButton(",");   
+    JButton gleichButton = new JButton("=");  
+    JButton geteiltButton = new JButton("÷");                     
     JButton löschenButton = new JButton("Löschen"); 
     
     double nummer1 = 0, nummer2 = 0, ergebnis = 0;  
@@ -61,10 +61,10 @@ class Fenster extends JFrame implements ActionListener {
         //Operator-Buttons werden dem entsprechenden Array hinzugefügt
         operatorButtons[0] = plusButton;        
         operatorButtons[1] = minusButton;       
-        operatorButtons[2] = malButton;        
-        operatorButtons[3] = geteiltButton;    
-        operatorButtons[4] = gleichButton;      
-        operatorButtons[5] = kommaButton;          
+        operatorButtons[2] = malButton;    
+        operatorButtons[3] = kommaButton;
+        operatorButtons[4] = gleichButton; 
+        operatorButtons[5] = geteiltButton;              
         operatorButtons[6] = löschenButton;     
         
         //Jeder Operator-Button im Array erhält einen ActionListener
@@ -107,14 +107,10 @@ class Fenster extends JFrame implements ActionListener {
     //Wenn irgendein ActionListener einen Klick wahrnimmt, wird die folgende Methode ausgeführt
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (int i = 0; i < 10; i++) {                                              
+        for (int i = 0; i < zahlenButtons.length; i++) {                                              
             if (e.getSource() == zahlenButtons[i]) {                                //Sofern das ActionEvent e von einem Button-Klick ausgelöst wurde,
                 textfeld.setText(textfeld.getText().concat(String.valueOf(i)));     //wird an den bestehenden Text der neue Text (hier die Zahl) angehängt
             }
-        }
-        
-        if (e.getSource() == kommaButton) {                           //Sofern das ActionEvent e von einem Button-Klick ausgelöst wurde,
-            textfeld.setText(textfeld.getText().concat("."));         //wird an den bestehenden Text der neue Text (hier das Komma) angehängt
         }
         
         if (e.getSource() == plusButton) {                            //Sofern eine bestimmte Rechenoperation gefordert wird://///////////////////////
@@ -140,7 +136,16 @@ class Fenster extends JFrame implements ActionListener {
             operator = '/';
             textfeld.setText("");
         }                                                             ////////////////////////////////////////////////////////////////////////////////
-                                                
+        
+        
+        if (e.getSource() == kommaButton) {                           //Sofern das ActionEvent e von einem Button-Klick ausgelöst wurde,
+            textfeld.setText(textfeld.getText().concat("."));         //wird an den bestehenden Text der neue Text (hier das Komma) angehängt
+        }
+        
+        if (e.getSource() == löschenButton) {                         //Wird der "Löschen"-Button gedrückt,
+            textfeld.setText("");                                     //wird das Ausgabefeld geleert
+        }
+        
         if (e.getSource() == gleichButton) {                          //Sobald der Gleich-Button gedrückt wird,
             nummer2 = Double.parseDouble(textfeld.getText());         //wird der zuvor eingegebene Wert in "nummer2" gespeichert
                 
@@ -160,11 +165,5 @@ class Fenster extends JFrame implements ActionListener {
             
             textfeld.setText(String.valueOf(ergebnis));               //Dem Textfeld wird das Ergebnis hinzugefügt
         }
-        
-        if (e.getSource() == löschenButton) {                         //Wird der "Löschen"-Button gedrückt,
-            textfeld.setText("");                                     //wird das Ausgabefeld geleert
-        }
-    
     }
-    
 }
